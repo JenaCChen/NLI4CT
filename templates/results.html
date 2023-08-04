@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>NLI4CT</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            width: 500px;
+            margin: 0 auto;
+        }
+        .input-text {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        .predict-button {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .highlight {
+            background-color: #6BC766;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Multi-evidence Natural Language Inference for Clinical Trial Data</h2>
+        <h4>Task 1: Textual Entailment</h4>
+        <form action="/results" method="post">
+            <textarea class="input-text" name="text_input" rows="4" placeholder='{{ statement }}'></textarea>
+            <h5>The entailment prediction is</h5>
+            <textarea class="input-text" name="entail_label" rows="2" placeholder='{{ entail_label }}'></textarea>
+            <h4>Task 2:  Evidence retrieval</h4>
+            <select class="input-text" name="section">
+                <option value="Intervention" {% if section == 'Intervention' %}selected{% endif %}>Intervention</option>
+                <option value="Eligibility" {% if section == 'Eligibility' %}selected{% endif %}>Eligibility</option>
+                <option value="Results" {% if section == 'Results' %}selected{% endif %}>Results</option>
+                <option value="Adverse Events" {% if section == 'Adverse Events' %}selected{% endif %}>Adverse Events</option>
+            </select>
+            <textarea class="input-text" name="evdience1" rows="4" placeholder="{{ evidence1 }}"></textarea>
+            <textarea class="input-text" name="evdience2" rows="4" placeholder="{{ evidence2 }}"></textarea>
+        </form>
+        {% if evi1 %}
+        <ul>
+            <h5>Supporting Evidence from Evidence 1 {{ evidence1 }} is highlighted:</h5>
+            {% for string, highlight_flag in evi1 %}
+            <li>
+                {% if highlight_flag == 1 %}
+                    <span class="highlight">{{ string }}</span>
+                {% else %}
+                    {{ string }}
+                {% endif %}
+            </li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% if evi2 %}
+        <ul>
+            <h5>Supporting Evidence from Evidence 2 {{ evidence2 }} is highlighted:</h5>
+            {% for string, highlight_flag in evi2 %}
+            <li>
+                {% if highlight_flag == 1 %}
+                    <span class="highlight">{{ string }}</span>
+                {% else %}
+                    {{ string }}
+                {% endif %}
+            </li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        <form action="{{  url_for('index')  }}">
+            <input class="predict-button" type="submit" value="Home" />
+        </form>
+    </div>
+</body>
+</html>

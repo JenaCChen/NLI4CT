@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>NLI4CT</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            width: 500px;
+            margin: 0 auto;
+        }
+        .input-text {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        .predict-button {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Multi-evidence Natural Language Inference for Clinical Trial Data</h2>
+        <h4>Task 1: Textual Entailment</h4>
+        <form action="/results" method="post">
+            <textarea class="input-text" name="text_input" rows="4" placeholder='{{ result }}'></textarea>
+            <h4>Task 2:  Evidence retrieval</h4>
+            <select class="input-text" name="section">
+                <option value="Intervention">Intervention</option>
+                <option value="Eligibility">Eligibility</option>
+                <option value="Results">Results</option>
+                <option value="Adverse Events">Adverse Events</option>
+            </select>
+            <textarea class="input-text" name="evdience1" rows="4" placeholder="Enter Primary Evidence ID here"></textarea>
+            <textarea class="input-text" name="evdience2" rows="4" placeholder="Enter Secondary Evidence ID here if present. If not present, please leave it blank."></textarea>
+            <input class="predict-button" type="submit" value="Predict">
+        </form>
+        {% if evi1 %}
+        <ul>
+            {% for string, highlight_flag in evi1 %}
+            <li>
+                {% if highlight_flag == 1 %}
+                    <span class="highlight">{{ string }}</span>
+                {% else %}
+                    {{ string }}
+                {% endif %}
+            </li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% if evi2 and evi2 is not None %}
+        <ul>
+            {% for string, highlight_flag in evi1 %}
+            <li>
+                {% if highlight_flag == 1 %}
+                    <span class="highlight">{{ string }}</span>
+                {% else %}
+                    {{ string }}
+                {% endif %}
+            </li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </div>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>NLI4CT</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            width: 500px;
+            margin: 0 auto;
+        }
+        .input-text {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        .predict-button {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Multi-evidence Natural Language Inference for Clinical Trial Data</h2>
+        <h4>Task 1: Textual Entailment</h4>
+        <form action="/task1" method="post">
+            <textarea class="input-text" name="text_input" rows="4" placeholder="Enter statement here"></textarea>
+            <input class="predict-button" type="submit" value="Predict">
+        </form>
+    </div>
+</body>
+</html>
