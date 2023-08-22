@@ -36,6 +36,15 @@ python train.py --model model_name --batch_size batch_size_value --lr learning_r
 
 Please replace `model_name`, `batch_size_value`, `learning_rate_value`, `num_epochs`, and `combination_option` with the desired values for the respective parameters.
 
+## Feature Combination
+
+- Mode 0: statement only
+- Mode 1: statement and evidence
+- Mode 2: statement, section, and evidence, this is the default setting
+- Mode 3: statement, section, and evidence with caption boundary markers
+- Mode 4: statement, section, and evidence with punctuation boundary markers
+- Mode 5: statement and section
+
 ## User Interface
 
 Our user interface leverages the pre-trained models to make inferences. If the models have not been trained previously, running the following command will automatically initiate the training process:
